@@ -3,7 +3,7 @@ import { useState } from "react";
 const Hello = function ({age}) {
   console.log(age);
   const [name, setName] = useState('Mike');
-  const msg = age>19? "성인" : "미성년자";
+  const msg = age>19? "성인" : "미성년자1";
 
   function changeName() {
     const newName = name === "Mike" ? "Jane" : "Mike";
