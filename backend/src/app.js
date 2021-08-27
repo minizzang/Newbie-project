@@ -1,14 +1,15 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const todoRouter = require("./routes/member");
+const dayRouter = require("./routes/day");
+const todoRouter = require("./routes/todo");
 const mongoose = require("mongoose")
 const cors = require("cors");
 
 const app = express();
 const port = 3002;
 
-mongoose.connect("mongodb://localhost:27017/todo", {
+mongoose.connect("mongodb://localhost:27017/", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use("/day", dayRouter);
 app.use("/todo", todoRouter);
 app.use(cors());
 

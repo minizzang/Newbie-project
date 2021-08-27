@@ -4,8 +4,8 @@ import DayList from './components/DayList';
 import Day from './components/Day';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import EmptyPage from './components/EmptyPage';
-import CreateWord from './components/CreateWord';
-import CreateDay from './components/CreateDay';
+import AddTodo from './components/AddTodo';
+import AddDay from './components/AddDay';
 import TimeTable from './components/TimeTable';
 
 function App() {
@@ -20,15 +20,15 @@ function App() {
           <Route path="/day/:day">
             <Day />
           </Route>
-          <Route path="/create_word">
-            <CreateWord />
+          <Route path="/AddTodo">
+            <AddTodo />
           </Route>
-          <Route path="/create_day">
-            <CreateDay />
+          <Route path="/AddDay">
+            <AddDay />
           </Route>
           <Route> <EmptyPage /> </Route>
         </Switch>
-        <TimeTable />
+        {/* <TimeTable /> */}
       </div>
     </BrowserRouter>
   );
