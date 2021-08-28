@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const dayRouter = require("./routes/day");
-const todoRouter = require("./routes/todo");
+const memberRouter = require("./routes/member");
 const mongoose = require("mongoose")
 const cors = require("cors");
 
@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use("/member", memberRouter);
 app.use("/day", dayRouter);
-app.use("/todo", todoRouter);
 app.use(cors());
 
 app.get("/", (req, res) => {

@@ -3,7 +3,7 @@ const db = require("../db");
 const router  = express.Router();
 
 router.get("/", (req, res) => {
-  db.getAll((items) => {
+  db.getAll_day((items) => {
     res.json(items);
   });
 });

@@ -1,15 +1,39 @@
 const DayModel = require("./models/day");
-const TodoModel = require("./models/todo");
+const MemberModel = require("./models/member");
 
-function getAll(callback) {
+function getAll_member(callback) {
+  MemberModel.find({}, (error, result) => {   //처음 인자는 filter용.
+    callback(result);
+  });
+}
 
-  DayModel.find({}, (error, result) => {   //처음 인자는 filter용.
+function getOne_member(id, callback) {
+  MemberModel.find({_id: id}, (error, result) => {
+    callback(result);
+  });
+}
+
+function get_membersByTime(time, callback) {
+  MemberModel.find({time: time}, (error, result) => {
+    callback(result);
+  });
+}
+
+function getAll_day(callback) {
+
+  DayModel.find({}, (error, result) => {
     callback(result);
   });
 }
 
 function deleteByDay(day, callback) {
   DayModel.deleteOne({day: day}, (error) => {
+    callback();
+  });
+}
+
+function deleteById(id, callback) {
+  MemberModel.deleteOne({_id: id}, (error) => {
     callback();
   });
 }
@@ -24,21 +48,20 @@ function add_day(day, callback) {
   })
 }
 
-function add_todo(contents, callback) {
-  const newItem = new TodoModel({
-    contents
+function add_member(contents, callback) {
+  const newItem = new MemberModel({
+    name : contents.name,
+    sex : contents.sex,
+    day : contents.day,
+    time : contents.time,
   });
+  // console.log(newItem)
   newItem.save((error, result) => {
     callback(result);  //사실은 error 핸들링 해야 함.
   })
 }
 
-function remove(id, callback) {
 
-  DayModel.deleteOne({_id: id}, (error) => {
-    callback();
-  });
-}
 
 function setDone(id, callback) {
 
@@ -53,10 +76,13 @@ function setDone(id, callback) {
 }
 
 module.exports = {
-  getAll,
+  getAll_member,
+  getOne_member,
+  getAll_day,
+  get_membersByTime,
   add_day,
-  add_todo,
-  remove,
+  add_member,
+  deleteById,
   setDone,
   deleteByDay
 };

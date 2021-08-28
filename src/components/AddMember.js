@@ -2,10 +2,15 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export default function CreateWord(){
+export default function AddMember(){
 
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
+
+    const nameRef = useRef(null);
+    const sexRef = useRef(null);
+    const dayRef = useRef(null);
+    const timeRef = useRef(null);
 
     function onSubmit(e){
         e.preventDefault();
@@ -13,7 +18,7 @@ export default function CreateWord(){
         if(!isLoading) {
             setIsLoading(true);
 
-            axios.post(`/api/todo`, 
+            axios.post(`/api/member`, 
             {
                 name : nameRef.current.value,
                 sex : sexRef.current.value,
@@ -21,8 +26,9 @@ export default function CreateWord(){
                 time : timeRef.current.value,
             }
             )
-          .then(() => axios.get(`/api/day`))
-          alert("생성이 완료되었습니다.")
+        //   .then(() => axios.get(`/api/member`))
+        
+          alert("회원이 추가되었습니다.")
           history.push(`/`)
           setIsLoading(false);
           };
@@ -48,10 +54,7 @@ export default function CreateWord(){
             //         }
             // });
 
-    const nameRef = useRef(null);
-    const sexRef = useRef(null);
-    const dayRef = useRef(null);
-    const timeRef = useRef(null);
+    
     
 
     return (
@@ -81,18 +84,18 @@ export default function CreateWord(){
                     ))}
                 </select> */}
                 <select ref={dayRef}>
-                    <option value="9">월</option>
-                    <option value="10">화</option>
-                    <option value="11">수</option>
-                    <option value="12"></option>
+                    <option value="mon">월</option>
+                    <option value="tue">화</option>
+                    <option value="wed">수</option>
+                    <option value="thu">목</option>
                 </select>
             </div>
 
             <div className="input_area">
                 <label>시간</label>
                 <select ref={timeRef}>
-                    <option value="male">9시</option>
-                    <option value="female">10시</option>
+                    <option value="9">9시</option>
+                    <option value="9.5">10시</option>
                 </select>
             </div>
             <button
