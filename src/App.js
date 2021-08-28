@@ -4,9 +4,11 @@ import DayList from './components/DayList';
 import Day from './components/Day';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import EmptyPage from './components/EmptyPage';
-import AddTodo from './components/AddTodo';
+import AddMember from './components/AddMember';
 import AddDay from './components/AddDay';
 import TimeTable from './components/TimeTable';
+import MemberList from './components/MemberList';
+import Member from './components/Member';
 
 function App() {
   return (
@@ -16,19 +18,23 @@ function App() {
         <Switch>
           <Route exact path="/">
             <DayList />
+            <MemberList />
+            <TimeTable />
           </Route>
           <Route path="/day/:day">
             <Day />
           </Route>
-          <Route path="/AddTodo">
-            <AddTodo />
+          <Route path="/member/:memId">
+            <Member />
+          </Route>
+          <Route path="/AddMember">
+            <AddMember />
           </Route>
           <Route path="/AddDay">
             <AddDay />
           </Route>
           <Route> <EmptyPage /> </Route>
         </Switch>
-        {/* <TimeTable /> */}
       </div>
     </BrowserRouter>
   );

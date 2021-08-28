@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function AddMember() {
+export default function AddDay() {
 
     const history = useHistory();
 
@@ -15,7 +15,7 @@ export default function AddMember() {
         });
     }, []);
 
-    function create_member(){
+    function create_day(){
 
         console.log("click1")
         axios.post(`/api/day`, 
@@ -35,7 +35,7 @@ export default function AddMember() {
     return(
         <div>
             <h3>현재 Day 수 : {days.length}일</h3>
-            <button onClick={create_member}>날짜 추가</button>
+            <button onClick={create_day}>날짜 추가</button>
         </div>
     )
 }

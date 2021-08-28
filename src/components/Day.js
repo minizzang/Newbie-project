@@ -1,4 +1,3 @@
-// import dummy from "../db/data.json";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Word from "./Word.js";
@@ -13,7 +12,7 @@ export default function Day() {
     const [words, setWords] = useState([]);
 
     useEffect(() => {
-        axios.get(`/api/todo`)
+        axios.get(`/api/day`)
         .then(response => {
             setWords(response.data);
         });
