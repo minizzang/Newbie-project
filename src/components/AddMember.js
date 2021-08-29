@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 export default function AddMember(){
 
     const history = useHistory();
+    const [member, setMember] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const nameRef = useRef(null);
@@ -17,45 +18,29 @@ export default function AddMember(){
 
         if(!isLoading) {
             setIsLoading(true);
-
-            axios.post(`/api/member`, 
-            {
-                name : nameRef.current.value,
-                sex : sexRef.current.value,
-                day : dayRef.current.value,
-                time : timeRef.current.value,
+            axios.get(`/api/member/cell/${timeRef.current.value}/${dayRef.current.value}`)
+            .then(response => {
+                setMember(response.data)
+            })
+            if (member[0] == null) {
+                alert("중복된 요일, 시간이 존재합니다.")
+                setIsLoading(false);
             }
-            )
-        //   .then(() => axios.get(`/api/member`))
-        
-          alert("회원이 추가되었습니다.")
-          history.push(`/`)
-          setIsLoading(false);
+            else {
+                axios.post(`/api/member`, 
+                    {
+                        name : nameRef.current.value,
+                        sex : sexRef.current.value,
+                        day : dayRef.current.value,
+                        time : timeRef.current.value,
+                    }
+                )
+                alert("회원이 추가되었습니다.")
+                history.push(`/`)
+                setIsLoading(false);
+            }
           };
     }
-
-
-            // fetch(`http://localhost:3001/words/`, {
-            //     method: 'POST',
-            //     headers : {
-            //         'Content-Type' : 'application/json',
-            //     },
-            //     body : JSON.stringify({
-            //         day : dayRef.current.value,
-            //         eng : engRef.current.value,
-            //         kor : korRef.current.value,
-            //         isDone : false
-            //     }),
-            //     }).then(res => {
-            //         if(res.ok){
-            //             alert("생성이 완료되었습니다.")
-            //             history.push(`/day/${dayRef.current.value}`)
-            //             setIsLoading(false);
-            //         }
-            // });
-
-    
-    
 
     return (
         <form onSubmit={onSubmit}>
@@ -88,6 +73,7 @@ export default function AddMember(){
                     <option value="tue">화</option>
                     <option value="wed">수</option>
                     <option value="thu">목</option>
+                    <option value="fri">금</option>
                 </select>
             </div>
 
@@ -95,14 +81,22 @@ export default function AddMember(){
                 <label>시간</label>
                 <select ref={timeRef}>
                     <option value="9">9시</option>
-                    <option value="9.5">10시</option>
+                    <option value="10">10시</option>
+                    <option value="11">11시</option>
+                    <option value="12">12시</option>
+                    <option value="13">13시</option>
+                    <option value="14">14시</option>
+                    <option value="15">15시</option>
+                    <option value="16">16시</option>
+                    <option value="17">17시</option>
+                    <option value="18">18시</option>
                 </select>
             </div>
             <button
                 style={{
                     opacity: isLoading ? 0.3 : 1
                 }}
-            >{isLoading ? "Saving..." : "저장"}</button>
+            >{isLoading ? "Saving..." : "등록"}</button>
         </form>
     )
 }

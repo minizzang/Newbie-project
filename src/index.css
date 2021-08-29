@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-/*여기 수정하기*/
+/*수정*/
 
 a {
   text-decoration: none;
@@ -34,21 +34,29 @@ ul {
 
 .header {
   position: relative;
+  padding: 10px;
+  /* background-color: olive; */
 }
 
-.header .menu {
+.header .image {
   position: absolute;
-  top: 10px;
+  width: auto;
+  height: 40px;
+  overflow: hidden;
+}
+
+.header .btn_add {
+  position: absolute;
+  top: 45px;
   right: 0;
 }
 
 .header .link {
-  border: 1px solid #333;
+  border: 2px solid rgb(7, 95, 129);
   padding: 10px;
-  margin-left: 10px;
-  background-color: #efefef;
+  background-color: #f5f5f5;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .list_day {
