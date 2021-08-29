@@ -28,14 +28,14 @@ ul {
 }
 
 .App {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
 }
 
 .header {
   position: relative;
   padding: 10px;
-  /* background-color: olive; */
+  background-color: rgb(210, 199, 247);
 }
 
 .header .image {
