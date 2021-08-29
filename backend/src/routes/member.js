@@ -20,6 +20,12 @@ router.get("/time/:time", (req, res) => {
   });
 });
 
+router.get("/cell/:time/:day", (req, res) => {
+  db.get_memberByTimeDay(req.params.time, req.params.day, (items) => {
+    res.json(items);
+  });
+});
+
 router.post("/", (req, res) => {
     // const {contents} = req.body;
     // console.log(req.body);

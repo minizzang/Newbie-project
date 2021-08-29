@@ -17,7 +17,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            <DayList />
+            {/* <DayList/ /> */}
             <MemberList />
             <TimeTable />
           </Route>

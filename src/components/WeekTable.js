@@ -1,45 +1,33 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import WeekItem from "./WeekItem";
 
-export default function WeekTable({ time:t }) {
+export default function WeekTable({ time }) {
 
     const [members, setMembers] = useState([]);
-    const [sortMem, setSortMem] = useState({
-        mon : "",
-        tue : "",
-        wed : "",
-        thu : "",
-        fri : ""
-    });
-
-    function sorting(item) {
-        if (item.day === "mon") setSortMem({ ...sortMem, mon : item.name })
-        else if (item.day === "tue") setSortMem({ ...sortMem, tue : item.name })
-        else if (item.day === "wed") setSortMem({ ...sortMem, wed : item.name })
-        else if (item.day === "thu") setSortMem({ ...sortMem, thu : item.name })
-        else if (item.day === "fri") setSortMem({ ...sortMem, fri : item.name })
-    }
-
 
     useEffect(() => {
-        // k = 2;
-        axios.get(`/api/member/time/${t}`)
+        axios.get(`/api/member/time/${time}`)
         .then(response => {
             setMembers(response.data);
-        });
+        })
             console.log("this is from weekTable");
-            console.log(t);
-            console.log(members);
-    }, [t]);
+            // console.log(members);
+    }, [time]);
 
+    // const memberElms = () => members.map(v => (
+    //     <WeekItem 
+    //         // key={v._id}
+    //         // name={v.name}
+    //         // day={v.day}
+    //     />
+    // ));
+    // const memberElms = <WeekItem member={members}/>
+    // console.log(members);
 
     return (
         <>
-            <td>{sortMem.mon}</td>
-            <td>{sortMem.tue}</td>
-            <td>{sortMem.wed}</td>
-            <td>{sortMem.thu}</td>
-            <td>{sortMem.fri}</td>
+            <td><WeekItem member={members}/></td>
         </>
     )
 }

@@ -8,10 +8,13 @@ export default function Member() {
     const history = useHistory();
     // console.log(id);
 
+    const [isLoading, setIsLoading] = useState(true);
+
     const [name, setName] = useState([]);
     const [sex, setSex] = useState([]);
     const [day, setDay] = useState([]);
     const [time, setTime] = useState([]);
+    const [created, setCreated] = useState([]);
     // const [member, setMember] = useState(); ??
 
     useEffect(() => {
@@ -21,7 +24,8 @@ export default function Member() {
             setSex(response.data[0].sex);
             setDay(response.data[0].day);
             setTime(response.data[0].time);
-            console.log("hello");
+            setCreated(response.data[0].createdAt.substr(0,10));
+            setIsLoading(false);
         });
     }, [memId]);
 
@@ -35,12 +39,17 @@ export default function Member() {
 
     return (
     <>
-        <h2>{name} 회원</h2>
-        <button onClick={() => onMemDelete()}>Delete</button>
-        <div>성별 : {sex}</div>
-        <div>요일 : {day}</div>
-        <div>시간 : {time}시</div>
-        <div>hello</div>
+        {isLoading ? "Loading data..." : 
+        <div>
+            <h2>{name} 회원</h2>
+            <button onClick={() => onMemDelete()}>Delete</button>
+            <div>성별 : {sex}</div>
+            <div>요일 : {day}</div>
+            <div>시간 : {time}시</div>
+            <div>등록일 : {created}</div>
+        </div>
+        }
+        
     </>
     );
 }

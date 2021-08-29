@@ -19,6 +19,12 @@ function get_membersByTime(time, callback) {
   });
 }
 
+function get_memberByTimeDay(time, day, callback) {
+  MemberModel.find( { $and: [{ time: time }, { day: day }] } , (error, result) => {
+    callback(result);
+  });
+}
+
 function getAll_day(callback) {
 
   DayModel.find({}, (error, result) => {
@@ -80,6 +86,7 @@ module.exports = {
   getOne_member,
   getAll_day,
   get_membersByTime,
+  get_memberByTimeDay,
   add_day,
   add_member,
   deleteById,
