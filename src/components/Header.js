@@ -8,7 +8,7 @@ export default function Header() {
                <img src={HeaderImage}/> 
             </div> */}
             <h1>
-                <Link to="/">미니 헬스장</Link>
+                <Link to="/">PT 시간표</Link>
             </h1>
             <div className="btn_add">
                 <Link to="/AddMember" className="link">회원 등록</Link>

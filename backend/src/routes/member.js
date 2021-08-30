@@ -41,8 +41,14 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-router.put("/:id/finish", (req, res) => {
-  db.setDone(req.params.id, () => {
+router.put("/:id/edit", (req, res) => {
+  db.editMember(req.params.id, req.body.name, req.body.sex, req.body.day, req.body.time, () => {
+    res.status(200).send();
+  });
+});
+
+router.put("/:id/editMemo", (req, res) => {
+  db.editMemo(req.params.id, req.body.memo, () => {
     res.status(200).send();
   });
 });

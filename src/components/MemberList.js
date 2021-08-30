@@ -20,7 +20,8 @@ export default function MemberList() {
 
     return (
     <>
-        <ul className="list_day">
+        <div className="word">회원 명단</div>
+        <ul className="list_member">
             {members.map( member => (
                 <li key={member._id}>
                     <Link to={`/member/${member._id}`}>{member.name}</Link>

@@ -5,6 +5,7 @@ import Day from './components/Day';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import EmptyPage from './components/EmptyPage';
 import AddMember from './components/AddMember';
+import EditMember from './components/EditMember';
 import AddDay from './components/AddDay';
 import TimeTable from './components/TimeTable';
 import MemberList from './components/MemberList';
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/AddMember">
             <AddMember />
+          </Route>
+          <Route path="/EditMember/:memId">
+            <EditMember />
           </Route>
           <Route path="/AddDay">
             <AddDay />

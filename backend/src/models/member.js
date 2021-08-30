@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
     sex: { type: String },
     day: { type: String },
     time : { type: String },
+    memo : { type : String },
 }, { timestamps: true });
 
 const MemberModel = mongoose.model("member", schema)

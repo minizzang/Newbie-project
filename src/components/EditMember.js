@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 export default function AddMember(){
 
     const history = useHistory();
+    const { memId } = useParams();
     const [member, setMember] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -12,6 +13,27 @@ export default function AddMember(){
     const sexRef = useRef(null);
     const dayRef = useRef(null);
     const timeRef = useRef(null);
+
+    const [name, setName] = useState([]);
+    const [sex, setSex] = useState([]);
+    const [day, setDay] = useState([]);
+    const [time, setTime] = useState([]);
+    const [created, setCreated] = useState([]);
+    // const [member, setMember] = useState(); ??
+
+    useEffect(() => {
+        axios.get(`/api/member/${memId}`)
+        .then(response => {
+            setName(response.data[0].name);
+            setSex(response.data[0].sex);
+            setDay(response.data[0].day);
+            setTime(response.data[0].time);
+            setCreated(response.data[0].createdAt.substr(0,10));
+            setIsLoading(false);
+        });
+    }, [memId]);
+
+    // console.log(memId)
 
     function onSubmit(e){
         e.preventDefault();
@@ -28,15 +50,16 @@ export default function AddMember(){
                 setIsLoading(false);
             }
             else {
-                axios.post(`/api/member`, 
+                axios.put(`/api/member/${memId}/edit`, 
                     {
+                        id : memId,
                         name : nameRef.current.value,
                         sex : sexRef.current.value,
                         day : dayRef.current.value,
                         time : timeRef.current.value,
                     }
                 )
-                alert("회원이 추가되었습니다.")
+                alert("회원 정보가 수정되었습니다.")
                 history.push(`/`)
                 setIsLoading(false);
             }
@@ -50,7 +73,7 @@ export default function AddMember(){
 
             <div className="input_area">
                 <label>이름</label>
-                <input type="text" placeholder="ex) 홍길동" ref={nameRef}></input>
+                <input type="text" defaultValue={name} placeholder="ex) 홍길동" ref={nameRef}></input>
             </div>
 
             <div className="input_area">
@@ -98,7 +121,7 @@ export default function AddMember(){
                 style={{
                     opacity: isLoading ? 0.3 : 1
                 }}
-            >{isLoading ? "Saving..." : "등록"}</button>
+            >{isLoading ? "Saving..." : "수정"}</button>
         </form>
     )
 }

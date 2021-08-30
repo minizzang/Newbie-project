@@ -81,6 +81,26 @@ function setDone(id, callback) {
 
 }
 
+function editMember(id, name, sex, day, time, callback) {
+
+  MemberModel.find({_id: id}, (error, result) => {   //처음 인자는 filter용.
+    MemberModel.updateOne({_id: id}, {$set: {name: name ,sex: sex, day: day ,time: time} }, () => {
+      callback();
+    });
+  });
+
+}
+
+function editMemo(id, memo, callback) {
+
+  MemberModel.find({_id: id}, (error, result) => {   //처음 인자는 filter용.
+    MemberModel.updateOne({_id: id}, {$set: {memo : memo} }, () => {
+      callback();
+    });
+  });
+
+}
+
 module.exports = {
   getAll_member,
   getOne_member,
@@ -91,5 +111,7 @@ module.exports = {
   add_member,
   deleteById,
   setDone,
-  deleteByDay
+  deleteByDay,
+  editMember,
+  editMemo
 };
